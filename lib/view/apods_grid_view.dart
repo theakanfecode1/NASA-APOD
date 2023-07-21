@@ -75,10 +75,9 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
             loading: () => const Center(child: LoadingIndicator()),
             success: (data) => RefreshIndicator(
                   onRefresh: () async {
-                     await ref.read(apodViewModelStateNotifierProvider.notifier).fetchMoreApods(
-                      pageSize: 10,
-                       isRefresh: true
-                    );
+                    await ref
+                        .read(apodViewModelStateNotifierProvider.notifier)
+                        .fetchMoreApods(pageSize: 10, isRefresh: true);
                   },
                   child: GridView.builder(
                     controller: _scrollController,
