@@ -1,0 +1,68 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:nasa_apod/models/apod.dart';
+import 'package:nasa_apod/res/style/app_colors.dart';
+import 'package:nasa_apod/res/style/app_text_styles.dart';
+import 'package:nasa_apod/utils/cache_manager.dart';
+import 'package:nasa_apod/utils/route.dart';
+import 'package:nasa_apod/view/apod_full_screen_view.dart';
+
+
+class ApodGridItem extends StatelessWidget {
+  final Apod apod;
+
+  const ApodGridItem({Key? key, required this.apod}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, scaleIn(ApodFullScreenView(apod: apod)));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5), color: AppColors.blue),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            FractionallySizedBox(
+              heightFactor: 1.0,
+              widthFactor: 1.0,
+              child: CachedNetworkImage(
+                imageUrl: apod.url,
+                fit: BoxFit.cover,
+                cacheManager: CustomCacheManager.instance,
+                memCacheWidth: 200,
+              ),
+            ),
+            FractionallySizedBox(
+              widthFactor: 1.0,
+              child: Container(
+                height: 40,
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    AppColors.black.withOpacity(0.01),
+                    AppColors.black.withOpacity(0.4),
+                  ],
+                  tileMode: TileMode.repeated,
+                )),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                  child: Text(
+                    apod.title,
+                    style: AppTextStyles.kH3Lightx2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

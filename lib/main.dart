@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:nasa_apod/core/network/services/custom_http_overrides.dart';
 import 'package:nasa_apod/res/style/app_colors.dart';
+import 'package:nasa_apod/view/apods_grid_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           fontFamily: ('Lato' ),
           colorScheme:
           ColorScheme.fromSwatch().copyWith(secondary: AppColors.black)),
-      home: Container(),
+      home: const ApodsGridView(),
     );
   }
 }
