@@ -7,7 +7,6 @@ import 'package:nasa_apod/res/style/app_text_styles.dart';
 import 'package:nasa_apod/view/components/apod_grid_item.dart';
 import 'package:nasa_apod/view_model/apod_view_model.dart';
 
-
 class ApodsGridView extends ConsumerStatefulWidget {
   const ApodsGridView({Key? key}) : super(key: key);
 
@@ -19,9 +18,9 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
   int _pageSize = 10;
   bool _isFirstLoadRunning = true;
   bool _isLoadMoreRunning = false;
-  ScrollController scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
-  void getPhotos() async {
+  void getApods() async {
     if (_isFirstLoadRunning) {
       await ref.read(apodViewModelStateNotifierProvider.notifier).getApods(
             pageSize: 10,
@@ -31,15 +30,15 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
       });
     } else {
       if (!_isLoadMoreRunning &&
-          (scrollController.position.pixels ==
-              scrollController.position.maxScrollExtent)) {
+          (_scrollController.position.pixels ==
+              _scrollController.position.maxScrollExtent)) {
         setState(() {
           _isLoadMoreRunning = true;
         });
         _pageSize += 1;
         await ref
             .read(apodViewModelStateNotifierProvider.notifier)
-            .getPaginatedApods(
+            .fetchMoreApods(
               pageSize: _pageSize,
             );
         _isLoadMoreRunning = false;
@@ -50,8 +49,8 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
 
   @override
   void initState() {
-    Future.delayed(Duration.zero, getPhotos);
-    scrollController.addListener(getPhotos);
+    Future.delayed(Duration.zero, getApods);
+    _scrollController.addListener(getApods);
     super.initState();
   }
 
@@ -74,19 +73,27 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
         child: apodsVm.when(
             idle: () => const Center(child: LoadingIndicator()),
             loading: () => const Center(child: LoadingIndicator()),
-            success: (data) => GridView.builder(
-                  controller: scrollController,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 5.0,
-                    mainAxisSpacing: 5.0,
-                    childAspectRatio:
-                        (MediaQuery.of(context).size.width / 2) / 200,
+            success: (data) => RefreshIndicator(
+                  onRefresh: () async {
+                     await ref.read(apodViewModelStateNotifierProvider.notifier).fetchMoreApods(
+                      pageSize: 10,
+                       isRefresh: true
+                    );
+                  },
+                  child: GridView.builder(
+                    controller: _scrollController,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                      childAspectRatio:
+                          (MediaQuery.of(context).size.width / 2) / 200,
+                    ),
+                    itemBuilder: (context, index) => ApodGridItem(
+                      apod: data[index],
+                    ),
+                    itemCount: (data as List<Apod>).length,
                   ),
-                  itemBuilder: (context, index) => ApodGridItem(
-                    apod: data[index],
-                  ),
-                  itemCount: (data as List<Apod>).length,
                 ),
             error: (error) => Center(
                   child: InkWell(

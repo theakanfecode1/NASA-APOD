@@ -63,6 +63,7 @@ class ApodGridItem extends StatelessWidget {
                       Text(
                         apod.title,
                         style: AppTextStyles.kH3Lightx1,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 3,),

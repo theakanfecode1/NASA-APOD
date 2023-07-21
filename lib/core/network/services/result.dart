@@ -27,12 +27,15 @@ class RequestStateNotifier<T> extends StateNotifier<RequestState<T>> {
       return newState;
     }
   }
-
-  Future<RequestState<T>> fetchNextPage(Future<T> Function() function) async {
+  // This function is used to get more data (pagination or drag to refresh) without changing the state notifier to RequestState<T>.loading()
+  Future<RequestState<T>> fetchMoreData(Future<T> Function() function,
+      {bool isRefresh = false}) async {
     try {
       final response = await function();
       final currentData = ((getSuccessData() ?? []) as List<dynamic>);
-      final newItems = currentData + (response as List<dynamic>) as T;
+      final newItems = (!isRefresh
+          ? currentData + (response as List<dynamic>)
+          : (response as List<dynamic>)  + currentData ) as T;
       final newState = RequestState<T>.success(newItems);
       if (mounted) {
         state = newState;
