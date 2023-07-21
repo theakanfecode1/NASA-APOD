@@ -5,6 +5,7 @@ import 'package:nasa_apod/res/style/app_colors.dart';
 import 'package:nasa_apod/res/style/app_text_styles.dart';
 import 'package:nasa_apod/utils/cache_manager.dart';
 import 'package:nasa_apod/utils/route.dart';
+import 'package:nasa_apod/utils/string_ext.dart';
 import 'package:nasa_apod/view/apod_full_screen_view.dart';
 
 
@@ -33,29 +34,44 @@ class ApodGridItem extends StatelessWidget {
                 fit: BoxFit.cover,
                 cacheManager: CustomCacheManager.instance,
                 memCacheWidth: 200,
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: AppColors.white,),
               ),
+
             ),
             FractionallySizedBox(
               widthFactor: 1.0,
               child: Container(
-                height: 40,
                 alignment: Alignment.bottomLeft,
+                height: 43,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.black.withOpacity(0.01),
-                    AppColors.black.withOpacity(0.4),
+                    AppColors.black.withOpacity(0.2),
+                    AppColors.black.withOpacity(0.3),
                   ],
                   tileMode: TileMode.repeated,
-                )),
+                )
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                  child: Text(
-                    apod.title,
-                    style: AppTextStyles.kH3Lightx2,
-                    overflow: TextOverflow.ellipsis,
+                  padding: const EdgeInsets.only(left: 8.0, bottom: 0.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        apod.title,
+                        style: AppTextStyles.kH3Lightx1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 3,),
+                      Text(
+                        apod.date.getFormatDate,
+                        style: AppTextStyles.kB2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
                 ),
               ),

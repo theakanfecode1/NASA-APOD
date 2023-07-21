@@ -12,11 +12,11 @@ class ApodsGridView extends ConsumerStatefulWidget {
   const ApodsGridView({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ApodsGridView> createState() => _PhotosViewState();
+  ConsumerState<ApodsGridView> createState() => _ApodsViewState();
 }
 
-class _PhotosViewState extends ConsumerState<ApodsGridView> {
-  int _page = 1;
+class _ApodsViewState extends ConsumerState<ApodsGridView> {
+  int _pageSize = 10;
   bool _isFirstLoadRunning = true;
   bool _isLoadMoreRunning = false;
   ScrollController scrollController = ScrollController();
@@ -24,7 +24,7 @@ class _PhotosViewState extends ConsumerState<ApodsGridView> {
   void getPhotos() async {
     if (_isFirstLoadRunning) {
       await ref.read(apodViewModelStateNotifierProvider.notifier).getApods(
-            pageNum: 1,
+            pageSize: 10,
           );
       setState(() {
         _isFirstLoadRunning = false;
@@ -36,11 +36,11 @@ class _PhotosViewState extends ConsumerState<ApodsGridView> {
         setState(() {
           _isLoadMoreRunning = true;
         });
-        _page += 1;
+        _pageSize += 1;
         await ref
             .read(apodViewModelStateNotifierProvider.notifier)
             .getPaginatedApods(
-              pageNum: _page,
+              pageSize: _pageSize,
             );
         _isLoadMoreRunning = false;
         setState(() {});
@@ -66,7 +66,7 @@ class _PhotosViewState extends ConsumerState<ApodsGridView> {
         backgroundColor: AppColors.black,
         title: const Text(
           'APOD Gallery',
-          style: AppTextStyles.kH2Light,
+          style: AppTextStyles.kH1Light,
         ),
       ),
       body: Padding(
@@ -78,8 +78,8 @@ class _PhotosViewState extends ConsumerState<ApodsGridView> {
                   controller: scrollController,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 10.0,
+                    crossAxisSpacing: 5.0,
+                    mainAxisSpacing: 5.0,
                     childAspectRatio:
                         (MediaQuery.of(context).size.width / 2) / 200,
                   ),
@@ -93,8 +93,8 @@ class _PhotosViewState extends ConsumerState<ApodsGridView> {
                     onTap: () {
                       ref
                           .read(apodViewModelStateNotifierProvider.notifier)
-                          .getApods(pageNum: 1);
-                      _page = 1;
+                          .getApods(pageSize: 10);
+                      _pageSize = 10;
                     },
                     child: const Text(
                       'Unable to load data.\n Tap to reload',
