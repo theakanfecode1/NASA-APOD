@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:nasa_apod/core/network/services/custom_http_overrides.dart';
 import 'package:nasa_apod/res/style/app_colors.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = CustomHttpOverrides();
   runApp(const MyApp());
 }
 
