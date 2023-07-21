@@ -1,6 +1,6 @@
 import 'package:nasa_apod/api_key.dart';
 import 'package:nasa_apod/core/network/services/app_dio.dart';
-import 'package:nasa_apod/models/apod_image.dart';
+import 'package:nasa_apod/models/apod.dart';
 
 class ApodDataSource {
   static Future<List<Apod>> getApods({required int pageNum}) async {
