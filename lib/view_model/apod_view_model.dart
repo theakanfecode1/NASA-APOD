@@ -12,9 +12,9 @@ class ApodViewModel extends RequestStateNotifier<void> {
 
   ApodViewModel(this._apodRepository);
 
-  Future<void> getApods({required int pageSize}) =>
-      makeRequest(() => _apodRepository.getApods(pageSize: pageSize));
+  Future<void> getApods() =>
+      makeRequest(() => _apodRepository.getApods());
 
-  Future<void> fetchMoreApods({required int pageSize,bool isRefresh = false}) =>
-      fetchMoreData(() => _apodRepository.getApods(pageSize: pageSize),isRefresh: isRefresh);
+  Future<void> fetchMoreApods({bool isRefresh = false}) =>
+      fetchMoreData(() => _apodRepository.getApods(),isRefresh: isRefresh);
 }

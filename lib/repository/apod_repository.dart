@@ -8,8 +8,8 @@ Provider<ApodRepository>((ref) => ApodRepository());
 
 class ApodRepository {
 
-  Future<List<Apod>> getApods({required int pageSize}) {
-    return ApodDataSource.getApods(pageSize: pageSize);
+  Future<List<Apod>> getApods() {
+    return ApodDataSource.getApods();
   }
 
 }

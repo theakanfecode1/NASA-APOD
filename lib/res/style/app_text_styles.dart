@@ -30,10 +30,24 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
   );
 
+  static const kH3Darkx1 = TextStyle(
+    letterSpacing: -0.25,
+    fontSize: 15.0,
+    color: AppColors.black,
+    fontWeight: FontWeight.w700,
+  );
+
   static const kB1 = TextStyle(
     letterSpacing: -0.25,
     fontSize: 15.0,
     color: AppColors.white,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const kB1Dark = TextStyle(
+    letterSpacing: -0.25,
+    fontSize: 15.0,
+    color: AppColors.black,
     fontWeight: FontWeight.w500,
   );
 

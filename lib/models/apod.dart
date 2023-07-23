@@ -1,4 +1,4 @@
-class Apod {
+class Apod{
   final String title;
   final String date;
   final String m64;
@@ -19,6 +19,7 @@ class Apod {
       date: json['date'] ?? '',
       m64: json['M64'] ?? '',
       explanation: json['explanation'] ?? '',
-      url: json['url'] ?? '',
+      url: json['thumbnail_url'] ?? json['url'] ?? '',
+      // thumbnail_url is for video, if it is not null then the media is video so we use the url for images
       hdUrl: json['hdurl'] ?? '');
 }
