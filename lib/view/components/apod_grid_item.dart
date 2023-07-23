@@ -18,6 +18,7 @@ class ApodGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        FocusScope.of(context).unfocus();
         Navigator.push(context, scaleIn(ApodFullScreenView(apod: apod)));
       },
       child: Container(

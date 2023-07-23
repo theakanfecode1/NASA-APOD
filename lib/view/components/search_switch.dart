@@ -16,8 +16,10 @@ class SearchSwitch extends StatelessWidget {
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       onTap: () {
+        FocusScope.of(context).unfocus();
         showModalBottomSheet(
             context: context,
+            backgroundColor: AppColors.black,
             isScrollControlled: true,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -26,7 +28,6 @@ class SearchSwitch extends StatelessWidget {
             ),
             builder: (context) => Container(
               decoration: const BoxDecoration(
-                color: AppColors.black,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40.0),
                     topRight: Radius.circular(40.0)),

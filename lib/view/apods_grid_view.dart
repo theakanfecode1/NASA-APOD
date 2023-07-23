@@ -123,6 +123,7 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
                         onSubmit: filterApods,
                         onSelectDate: onSelectDate,
                         onClear: () {
+                          FocusScope.of(context).unfocus();
                           setState(() {
                             _searchTextEditingController.clear();
                           });
