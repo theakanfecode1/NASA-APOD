@@ -1,6 +1,11 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:nasa_apod/main.dart';
+import 'package:nasa_apod/res/style/app_text_styles.dart';
+import 'package:nasa_apod/utils/connection_status.dart';
 
 import '../app_and_server_error/app_error.dart';
 
@@ -30,6 +35,10 @@ class RequestStateNotifier<T> extends StateNotifier<RequestState<T>> {
   // This function is used to get more data (pagination or drag to refresh) without changing the state notifier to RequestState<T>.loading()
   Future<RequestState<T>> fetchMoreData(Future<T> Function() function,
       {bool isRefresh = false}) async {
+    if(await ConnectionStatus.isOnline()){
+      showNetworkErrorSnackBar();
+      return RequestState<T>.success([] as T);
+    }
     try {
       final response = await function();
       final currentData = ((getSuccessData() ?? []) as List<dynamic>);
@@ -58,6 +67,16 @@ class RequestStateNotifier<T> extends StateNotifier<RequestState<T>> {
         success: (data) => data,
         error: (error) {});
   }
+
+  void showNetworkErrorSnackBar() {
+    SnackBar snackBar =const  SnackBar(
+      content: Text('No Internet connection',style: AppTextStyles.kB1,),
+      duration: Duration(seconds: 1), // Duration for how long the SnackBar will be displayed
+    );
+
+    snackbarKey.currentState?.showSnackBar(snackBar); // Show the SnackBar
+  }
+
 }
 
 @freezed

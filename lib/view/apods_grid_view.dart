@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -22,14 +23,13 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
   bool _isFirstLoadRunning = true;
   bool _isLoadMoreRunning = false;
   final TextEditingController _searchTextEditingController =
-  TextEditingController();
+      TextEditingController();
   final ScrollController _scrollController = ScrollController();
   List<Apod> _filteredApods = [];
 
   void getApods() async {
     if (_isFirstLoadRunning) {
-      await ref.read(apodViewModelStateNotifierProvider.notifier).getApods(
-      );
+      await ref.read(apodViewModelStateNotifierProvider.notifier).getApods();
       setState(() {
         _isFirstLoadRunning = false;
       });
@@ -42,8 +42,7 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
         });
         await ref
             .read(apodViewModelStateNotifierProvider.notifier)
-            .fetchMoreApods(
-        );
+            .fetchMoreApods();
         _isLoadMoreRunning = false;
         setState(() {});
       }
@@ -71,13 +70,16 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
       lastDate: DateTime.now(),
     );
     if (selectedDateTime != null) {
-      _searchTextEditingController.text = DateFormat('yyyy-MM-dd').format(selectedDateTime);
+      _searchTextEditingController.text =
+          DateFormat('yyyy-MM-dd').format(selectedDateTime);
       filterApods(_searchTextEditingController.text.trim());
     }
   }
 
   void filterApods(String query) {
-    List<Apod> apods = ref.read(apodViewModelStateNotifierProvider.notifier).getSuccessData() as List<Apod>;
+    List<Apod> apods = ref
+        .read(apodViewModelStateNotifierProvider.notifier)
+        .getSuccessData() as List<Apod>;
     final filteredApods = apods.where((apod) {
       final title = apod.title.toLowerCase();
       final date = apod.date.toLowerCase();
@@ -109,12 +111,11 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
         child: apodsVm.when(
             idle: () => const Center(child: LoadingIndicator()),
             loading: () => const Center(child: LoadingIndicator()),
-            success: (data) =>
-                RefreshIndicator(
+            success: (data) => RefreshIndicator(
                   onRefresh: () async {
-                    await ref
-                        .read(apodViewModelStateNotifierProvider.notifier)
-                        .fetchMoreApods(isRefresh: true);
+                      await ref
+                          .read(apodViewModelStateNotifierProvider.notifier)
+                          .fetchMoreApods(isRefresh: true);
                   },
                   child: Column(
                     children: [
@@ -123,7 +124,7 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
                         onChange: filterApods,
                         onSubmit: filterApods,
                         onSelectDate: onSelectDate,
-                        onClear:(){
+                        onClear: () {
                           setState(() {
                             _searchTextEditingController.clear();
                           });
@@ -142,16 +143,18 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
                       ),
                       Expanded(
                         child: _searchTextEditingController.text.isEmpty
-                            ? ApodGrid(scrollController: _scrollController,
-                          apods: data as List<Apod>,)
+                            ? ApodGrid(
+                                scrollController: _scrollController,
+                                apods: data as List<Apod>,
+                              )
                             : ApodGrid(
-                          apods: _filteredApods,),
+                                apods: _filteredApods,
+                              ),
                       ),
                     ],
                   ),
                 ),
-            error: (error) =>
-                Center(
+            error: (error) => Center(
                   child: InkWell(
                     onTap: () {
                       ref
@@ -168,4 +171,5 @@ class _ApodsViewState extends ConsumerState<ApodsGridView> {
       ),
     );
   }
+
 }
