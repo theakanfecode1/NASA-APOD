@@ -60,7 +60,7 @@ Here are some key design choices and implementations in the application:
    enabling offline data loading.
    Fetched astronomy pictures are stored in the Hive database using the `cacheApods` method, saving
    them as a JSON representation.
-   When users access the app offline, the `getCachedApods` method checks for cached pictures in
+   When users access the app offline, the `getCachedApods` method checks for cached apods in
    Hive, displaying them in the interface for seamless viewing.
    This caching mechanism enhances the user experience by providing uninterrupted access to
    previously fetched astronomy pictures, even without an internet connection.
