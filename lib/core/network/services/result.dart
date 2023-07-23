@@ -35,7 +35,7 @@ class RequestStateNotifier<T> extends StateNotifier<RequestState<T>> {
   // This function is used to get more data (pagination or drag to refresh) without changing the state notifier to RequestState<T>.loading()
   Future<RequestState<T>> fetchMoreData(Future<T> Function() function,
       {bool isRefresh = false}) async {
-    if(await ConnectionStatus.isOnline()){
+    if(!await ConnectionStatus.isOnline()){
       showNetworkErrorSnackBar();
       return RequestState<T>.success([] as T);
     }
