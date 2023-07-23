@@ -1,6 +1,7 @@
 # Astronomy Picture of the Day (APOD) Viewer App
 
-Welcome to the Astronomy Picture of the Day (APOD) Viewer application!This app allows you to explore and enjoy a collection of
+Welcome to the Astronomy Picture of the Day (APOD) Viewer application!This app allows you to explore
+and enjoy a collection of
 captivating astronomy pictures fetched from NASA's APOD API.
 
 ## Prerequisites
@@ -29,7 +30,6 @@ To get started with the application, follow these steps:
 
 This will launch the application on an available emulator or connected device.
 
-
 ## ADDITIONAL INFORMATION ABOUT IMPLEMENTATION OR DESIGN CHOICES
 
 The application was designed using the MVVM (Model-View-ViewModel) architecture pattern, combined
@@ -50,14 +50,20 @@ Here are some key design choices and implementations in the application:
    library. The `getApods` method fetches a list of apods based on the provided page number. The
    received JSON response was then mapped to a list of `Apod` objects.
 
-3. Pagination: The default count is set to 10 because the APOD API does not provide pagination options such 
-   as page or pageNum. As a result, I utilize the 'count' parameter for pagination, which allows me to 
+3. Pagination: The default count is set to 10 because the APOD API does not provide pagination
+   options such
+   as page or pageNum. As a result, I utilize the 'count' parameter for pagination, which allows me
+   to
    retrieve a random selection of images.
 
-4. Caching Mechanism and Offline Retrieval: The app employs the Hive database library for caching, enabling offline data loading. 
-   Fetched astronomy pictures are stored in the Hive database using the `cacheApods` method, saving them as a JSON representation. 
-   When users access the app offline, the `getCachedApods` method checks for cached pictures in Hive, displaying them in the interface for seamless viewing. 
-   This caching mechanism enhances the user experience by providing uninterrupted access to previously fetched astronomy pictures, even without an internet connection.
+4. Caching Mechanism and Offline Retrieval: The app employs the Hive database library for caching,
+   enabling offline data loading.
+   Fetched astronomy pictures are stored in the Hive database using the `cacheApods` method, saving
+   them as a JSON representation.
+   When users access the app offline, the `getCachedApods` method checks for cached pictures in
+   Hive, displaying them in the interface for seamless viewing.
+   This caching mechanism enhances the user experience by providing uninterrupted access to
+   previously fetched astronomy pictures, even without an internet connection.
 
 5. Image Caching: The application includes caching functionality to enhance performance and minimize
    unnecessary network requests. It utilizes the `CachedNetworkImage` widget from
@@ -66,7 +72,8 @@ Here are some key design choices and implementations in the application:
    was employed. This caching mechanism effectively reduces data usage and enhances the user
    experience by ensuring faster image loading on subsequent requests.
 
-6. Testing: Unit and Widget tests are included to verify the functionality and behavior of key components, such
+6. Testing: Unit and Widget tests are included to verify the functionality and behavior of key
+   components, such
    as the `ApodDataSource`, `ApodGridView`, `ApodFullScreenView` classes and the ViewModel.
    Tests are written using the Flutter test framework and cover scenarios like fetching apods,
    handling errors, and verifying the structure and properties of the received data. The tests
@@ -79,7 +86,6 @@ codebase more modular and testable. The pagination and caching mechanisms optimi
 performance by efficiently managing data loading and minimizing unnecessary network requests. The
 inclusion of unit tests helps ensure the correctness of the implemented features and aids in
 catching bugs early in the development process.
-
 
 ## PERFORMANCE OPTIMIZATIONS
 
@@ -110,7 +116,6 @@ catching bugs early in the development process.
 Overall, the user experience was improved through enhanced load times, reduced network latency, and
 the provision of a responsive and smooth UI, resulting in higher user satisfaction.
 
-
 ## Running Tests
 
 The application includes unit tests to ensure the functionality is working correctly. To execute the
@@ -126,8 +131,10 @@ tests, follow these steps:
     - For apod_datasource_test.dart: flutter test test/datasource/apod_datasource_test.dart
 
 To run test files all together
--  flutter test test/datasource/apod_datasource_test.dart test/presentation/apod_full_screen_test.dart
-   test/presentation/apod_grid_view_test.dart
+
+- flutter test test/datasource/apod_datasource_test.dart
+  test/presentation/apod_full_screen_test.dart
+  test/presentation/apod_grid_view_test.dart
 
 This command will run all the unit tests and display the results in the console.
 
@@ -147,7 +154,8 @@ If you encounter any issues running the application or the tests, you can try th
 If you need any further assistance or have any questions, please feel free to reach out to me at
 danielogundiranakanfe@gmail.com.
 
-Enjoy browsing through the beautiful APOD collection in the Astronomy Picture of the Day (APOD) Viewer App!
+Enjoy browsing through the beautiful APOD collection in the Astronomy Picture of the Day (APOD)
+Viewer App!
 
 
 
