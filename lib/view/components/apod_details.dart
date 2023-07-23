@@ -1,9 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_apod/models/apod.dart';
 import 'package:nasa_apod/res/components/read_more_text.dart';
 import 'package:nasa_apod/res/style/app_text_styles.dart';
-import 'package:nasa_apod/utils/cache_manager.dart';
 import 'package:nasa_apod/utils/string_ext.dart';
 
 

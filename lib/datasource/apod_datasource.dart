@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import 'package:nasa_apod/api_key.dart';
 import 'package:nasa_apod/core/network/services/app_dio.dart';
 import 'package:nasa_apod/datasource/local_db.dart';

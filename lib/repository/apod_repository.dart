@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nasa_apod/datasource/apod_datasource.dart';
 import 'package:nasa_apod/datasource/local_db.dart';

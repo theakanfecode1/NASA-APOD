@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nasa_apod/res/style/app_colors.dart';
 import 'package:nasa_apod/res/style/app_text_styles.dart';
-import 'package:nasa_apod/view/components/apod_search_form_field.dart';
 
 class SearchSwitch extends StatelessWidget {
   const SearchSwitch({

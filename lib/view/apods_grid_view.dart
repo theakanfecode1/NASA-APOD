@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -6,7 +5,6 @@ import 'package:nasa_apod/models/apod.dart';
 import 'package:nasa_apod/res/components/loading_indicator.dart';
 import 'package:nasa_apod/res/style/app_colors.dart';
 import 'package:nasa_apod/res/style/app_text_styles.dart';
-import 'package:nasa_apod/view/components/apod_grid_item.dart';
 import 'package:nasa_apod/view/components/apod_search_form_field.dart';
 import 'package:nasa_apod/view/components/apods_grid.dart';
 import 'package:nasa_apod/view/components/search_switch.dart';
