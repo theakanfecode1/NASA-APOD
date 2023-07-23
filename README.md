@@ -47,7 +47,7 @@ Here are some key design choices and implementations in the application:
 
 2. API Integration: The application integrates with an API to fetch the apod data.
    The `ApodDataSource` class handles the API requests and responses using the Dio HTTP client
-   library. The `getApods` method fetches a list of apods based on the provided page number. The
+   library. The `getApods` method fetches a list of apods based on the provided count number. The
    received JSON response was then mapped to a list of `Apod` objects.
 
 3. Pagination: The default count is set to 10 because the APOD API does not provide pagination
