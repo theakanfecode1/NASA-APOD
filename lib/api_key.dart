@@ -1,4 +1,4 @@
-const String nasaApiKey = 'inser your api key';
+const String nasaApiKey = 'insert your api key';
 
 
 
