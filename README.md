@@ -1,8 +1,7 @@
 # Astronomy Picture of the Day (APOD) Viewer App
 
 Welcome to the Astronomy Picture of the Day (APOD) Viewer application!This app allows you to explore
-and enjoy a collection of
-captivating astronomy pictures fetched from NASA's APOD API.
+and enjoy a collection of captivating astronomy pictures fetched from NASA's APOD API.
 
 ## Prerequisites
 
@@ -151,11 +150,5 @@ If you encounter any issues running the application or the tests, you can try th
 - If you're running the tests and they fail due to network-related issues, make sure you have a
   stable internet connection and that the API server is accessible.
 
-If you need any further assistance or have any questions, please feel free to reach out to me at
+If you need any questions, please feel free to reach out to me at
 danielogundiranakanfe@gmail.com.
-
-Enjoy browsing through the beautiful APOD collection in the Astronomy Picture of the Day (APOD)
-Viewer App!
-
-
-
