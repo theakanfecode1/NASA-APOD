@@ -3,6 +3,8 @@
 Welcome to the Astronomy Picture of the Day (APOD) Viewer application!This app allows you to explore
 and enjoy a collection of captivating astronomy pictures fetched from NASA's APOD API.
 
+This repo is dedciated to showing the use MVVM, Riverpod, Caching(HIVE DB), Offline Capabilities and Flutter Test
+
 ## Prerequisites
 
 Before running the application, please make sure you have the following installed on your machine:
